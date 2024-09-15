@@ -1,0 +1,71 @@
+.sec1 {
+  /* margin: 0rem 5rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  overflow: auto;
+
+}
+
+.sec2 {
+  margin: 0rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mb-3 {
+  width: 70rem;
+}
+
+.sec1 .card {
+  overflow: hidden;
+}
+
+.sec1 .card .img {
+  height: 10rem;
+  object-fit: cover;
+}
+
+.sec2 .col-md-4 img {
+  margin: .5rem;
+  width: 20vw;
+  border-radius: 6px;
+}
+
+.sec2 .col-md-4 .img01 {
+  border-radius: 12px;
+}
+
+.card {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.card-body{
+  cursor: pointer;
+}
+
+@media (max-width: 1156px) {
+  .card {
+    width: calc(50% - 20px);
+    height: auto;
+    /* You can set a specific height if needed */
+    margin-right: auto;
+    margin-left: auto;
+    max-width: none
+  }
+}
+
+@media (max-width: 468px) {
+  .card {
+    width: calc(80% - 10px);
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: none
+  }
+}

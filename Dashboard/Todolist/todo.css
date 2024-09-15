@@ -1,0 +1,131 @@
+/* Variables */
+:root {
+    --dark: #1b1c1d;
+    --blue: #2185d0;
+    --green: #1ebc30;
+    --red: #db2828;
+    --white: #ffffff;
+    --gray: #babac0;
+    --secondary: #fbfdff;
+  }
+  
+  /* Default Settings */
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    color: var(--dark);
+    background: var(--secondary);
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-width: 90%;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #0874ec;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #0874ec; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .complete {
+    text-decoration: line-through;
+    color: #888;
+  }
+  
+  .delete-btn, .edit-btn, .timer-btn {
+    background-color: #0874ec; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50;
+  }
+  
+  .timer-btn {
+    background-color: #FFC107;
+  }
+  
+  /* For the Timer Alert */
+  #timerAlert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Initially hidden */
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+  }
+  
+  #timerAlertMessage {
+    font-weight: bold;
+  }

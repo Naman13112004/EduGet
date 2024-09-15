@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- custom css file link  -->
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="login.css">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- login/sign in section starts -->
+    <section class="login">
+
+
+        <div class="container" id="main">
+            <div class="sign-up">
+                <form action="#">
+                    <h1>Create account</h1>
+                    <input type="text" name="txt" placeholder="Name" required="">
+                    <input type="email" name="email" placeholder="Email" required="">
+                    <input type="password" name="pswd" placeholder="Password" required="">
+                    <button>Sign Up</button>
+                </form>
+            </div>
+            <div class="sign-in">
+                <form action="#">
+                    <h1>Sign in</h1>
+                    <input type="email" name="email" placeholder="Email" required="">
+                    <input type="password" name="pswd" placeholder="Password" required="">
+                    <a href="#">Forgot your password?</a>
+                    <button>Sign In</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-left">
+                        <h1>Welcome back!!</h1>
+                        <p>To our platform to become organized & updated</p>
+                        <button id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-right">
+                        <h1>Hello folk's</h1>
+                        <p>Be one step closer to improvement</p>
+                        <button id="signUp">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- login/sign in section ends -->
+
+
+
+    <!-- custom js file link  -->
+    <script src="js/script.js"></script>
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const main = document.getElementById('main');
+
+        signUpButton.addEventListener('click', () => {
+            main.classList.add("right-panel-active");
+        });
+        signInButton.addEventListener('click', () => {
+            main.classList.remove("right-panel-active");
+        });
+
+
+
+        // Dummy users for testing purposes (replace with backend authentication in production)
+        const users = [
+            {
+                email: "user@example.com",
+                password: "password123",
+                role: "admin"
+            },
+            {
+                email: "guest@example.com",
+                password: "guestpass",
+                role: "user"
+            }
+        ];
+
+        // Handle Sign In
+        document.querySelector(".sign-in form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const email = e.target.email.value;
+            const password = e.target.pswd.value;
+
+            // Check if user exists and password matches
+            const user = users.find(user => user.email === email && user.password === password);
+
+            if (user) {
+                // Store user info in localStorage or sessionStorage
+                localStorage.setItem("user", JSON.stringify(user));
+
+                // Redirect to dashboard or a protected page
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Invalid email or password.");
+            }
+        });
+
+        // Handle Sign Up (this is client-side only; replace with server-side in production)
+        document.querySelector(".sign-up form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const email = e.target.email.value;
+            const password = e.target.pswd.value;
+
+            const newUser = {
+                email: email,
+                password: password,
+                role: "user"
+            };
+
+            users.push(newUser); // In a real-world scenario, send this data to a server
+            alert("Account created successfully!");
+        });
+
+        // Check if user is authenticated (use on protected pages)
+        function checkAuthentication() {
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            if (!user) {
+                alert("You are not authorized. Please log in.");
+                window.location.href = "login.html";
+            } else {
+                console.log("Authenticated user:", user.email);
+            }
+        }
+
+        // Optional: Add logout functionality
+        function logout() {
+            localStorage.removeItem("user");
+            window.location.href = "login.html";
+        }
+
+// Example for using in the dashboard or protected page
+// checkAuthentication();
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student To-Do List</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Student To-Do List</h1>
+
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Add a task...">
+            <button id="addTaskBtn">Add Task</button>
+        </div>
+
+        <ul id="taskList"></ul>
+
+        <div id="timerAlert" class="alert alert-warning" style="display:none;">
+            <span id="timerAlertMessage"></span>
+            <button onclick="closeTimerAlert()">Close</button>
+        </div> 
+
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+        const timerAlert = document.getElementById('timerAlert');
+        const timerAlertMessage = document.getElementById('timerAlertMessage');
+
+        addTaskBtn.addEventListener('click', () => {
+            const taskText = taskInput.value.trim();
+            if (taskText !== "") {
+                addTask(taskText);
+                taskInput.value = "";
+            }
+        });
+
+        function addTask(taskText) {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <span>${taskText}</span>
+                <button class="edit-btn" onclick="editTask(this)">Edit</button>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+                <button class="timer-btn" onclick="setTimer(this)">Set Timer</button>
+            `;
+
+            taskList.appendChild(listItem);
+        }
+
+        function deleteTask(button) {
+            const listItem = button.parentElement;
+            taskList.removeChild(listItem);
+        }
+
+        function editTask(button) {
+            const listItem = button.parentElement;
+            const taskSpan = listItem.querySelector('span');
+            const taskText = taskSpan.textContent;
+
+            // Replace the span with an input field for editing
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.value = taskText;
+            inputField.addEventListener('blur', () => { // On losing focus
+                const newTaskText = inputField.value.trim();
+                if (newTaskText !== "") {
+                    taskSpan.textContent = newTaskText;
+                    listItem.replaceChild(taskSpan, inputField);
+                } else {
+                    // If the input is empty, revert back to the original text
+                    listItem.replaceChild(taskSpan, inputField);
+                }
+            });
+
+            listItem.replaceChild(inputField, taskSpan);
+            inputField.focus(); // Focus on the input field
+        }
+
+        function setTimer(button) {
+            const listItem = button.parentElement;
+            const taskSpan = listItem.querySelector('span');
+            const taskText = taskSpan.textContent;
+
+            // Get the desired timer duration from the user (e.g., using a prompt or input)
+            const timerDuration = prompt("Enter timer duration in seconds:", "60"); 
+            if (timerDuration !== null && !isNaN(timerDuration)) { // Validate the input
+                let timerId = setTimeout(() => {
+                    showTimerAlert(`Timer for "${taskText}" is up!`);
+                }, timerDuration * 1000); 
+
+                // Store the timer ID so you can clear it later (optional)
+                listItem.dataset.timerId = timerId; 
+            }
+        }
+
+        function showTimerAlert(message) {
+            timerAlertMessage.textContent = message;
+            timerAlert.style.display = 'block'; 
+        }
+
+        function closeTimerAlert() {
+            timerAlert.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
